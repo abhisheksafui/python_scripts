@@ -12,6 +12,7 @@ BUFFER_SIZE = 100
 
 CAPS_MESSAGE = "<MSGTYPE:CAPS><MYID:Abhic2><CAPS:TYPE=SWITCH,ID=SW1>"
 HELLO_MESSAGE = "<MSGTYPE:HELLO><Hello Gateway>"
+GET_RESPONSE = "<MSGTYPE:GET_RESP><ID=SW1,VAL=ON>"
 
 s = socket.socket(socket.AF_INET,socket.SOCK_STREAM) 
 s.connect((TCP_IP, TCP_PORT))
@@ -41,6 +42,9 @@ while 1:
                     if match.group(1) == 'HELLO':
                         outputs.append(i)
                         message_q.append(HELLO_MESSAGE) 
+                    if match.group(1) == 'GET':
+                        outputs.append(i)
+                        message_q.append(GET_RESPONSE) 
             else: 
                 print '\nConnection closed by Server'
                 i.close()
